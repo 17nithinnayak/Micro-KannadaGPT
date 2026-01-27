@@ -49,3 +49,14 @@ kannada_text = """
 ತಾರೆಗಳು ಆಕಾಶದ ಆಭರಣ.
 ಮಾತು ಮನಸ್ಸಿನ ಕನ್ನಡಿ.
 """
+
+class CharTokenizer:
+    def __init__(self, text):
+       chars = sorted(list(set(text)))
+       self.vocab_size = len(chars)
+       self.char_to_idx = {ch: i for i, ch in enumerate(chars)}
+       self.idx_to_char = {i: ch for i, ch in enumerate(chars)}
+       print(f"Tokenizer initialized: {self.vocab_size} unique characters")
+       print(f"Sample chars: {chars[:10]}")
+
+    
