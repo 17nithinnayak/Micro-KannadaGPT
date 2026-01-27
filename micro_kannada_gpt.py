@@ -75,6 +75,9 @@ vocab_size = tokenizer.vocab_size
 data = torch.tensor(tokenizer.encode(kannada_text), dtype=torch.long)
 print(f"Dataset size: {len(data)} characters")
 
-
+# Train/val split (90/10)
+n = int(0.9 * len(data))
+train_data = data[:n]
+val_data = data[n:]
 
   
