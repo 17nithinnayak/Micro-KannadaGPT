@@ -59,4 +59,11 @@ class CharTokenizer:
        print(f"Tokenizer initialized: {self.vocab_size} unique characters")
        print(f"Sample chars: {chars[:10]}")
 
-    
+    def encode(self, text):
+        """Convert string to list of integers"""
+        return [self.char_to_idx[ch] for ch in text]
+
+    def decode(self, indices):
+        """Convert list of integers back to string"""
+        return ''.join([self.idx_to_char[i] for i in indices])
+
