@@ -71,4 +71,10 @@ class CharTokenizer:
 tokenizer = CharTokenizer(kannada_text)
 vocab_size = tokenizer.vocab_size
 
+# Encode entire dataset
+data = torch.tensor(tokenizer.encode(kannada_text), dtype=torch.long)
+print(f"Dataset size: {len(data)} characters")
+
+
+
   
