@@ -67,3 +67,8 @@ class CharTokenizer:
         """Convert list of integers back to string"""
         return ''.join([self.idx_to_char[i] for i in indices])
 
+# Initialize tokenizer
+tokenizer = CharTokenizer(kannada_text)
+vocab_size = tokenizer.vocab_size
+
+  
