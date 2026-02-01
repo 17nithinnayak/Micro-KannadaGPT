@@ -49,3 +49,7 @@ Input Text: "ಜ್ಞಾನವೇ"
       ↓
     SAMPLE → Next Token
 ```
+Model Specifications
+```
+ParameterValuePurposevocab_size45Number of unique characters in Kannada textn_embd64Embedding dimension (vector size per token)n_head4Number of parallel attention headsn_layer4Number of decoder blocks stackedblock_size128Maximum sequence length (context window)dropout0.1Regularization probabilitytotal_params~209KTotal trainable parameters
+```
