@@ -51,5 +51,12 @@ Input Text: "ಜ್ಞಾನವೇ"
 ```
 Model Specifications
 ```
-ParameterValuePurposevocab_size45Number of unique characters in Kannada textn_embd64Embedding dimension (vector size per token)n_head4Number of parallel attention headsn_layer4Number of decoder blocks stackedblock_size128Maximum sequence length (context window)dropout0.1Regularization probabilitytotal_params~209KTotal trainable parameters
+Parameter Value Purpose
+vocab_size 45 Number of unique characters in Kannada t
+extn_embd 64 Embedding dimension (vector size per token)
+n_head 4 Number of parallel attention heads
+n_layer 4 Number of decoder blocks stacked
+block_size 128 Maximum sequence length (context window)
+dropout 0.1 Regularization probability
+total_params ~209 KTotal trainable parameters
 ```
