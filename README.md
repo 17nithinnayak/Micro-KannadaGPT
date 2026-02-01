@@ -198,3 +198,18 @@ Analogy:
 
 Attention = "Communication" (tokens talk to each other)
 FFN = "Thinking" (process what you learned)
+
+4. Layer Normalization
+Purpose: Stabilize training by normalizing activations to mean=0, variance=1.
+Formula:
+```
+LayerNorm(x) = γ ⊙ (x - μ) / √(σ² + ε) + β
+
+Where:
+  μ = mean(x) across embedding dimension
+  σ² = variance(x) across embedding dimension
+  γ = learned scale parameter (default: 1)
+  β = learned shift parameter (default: 0)
+  ε = small constant for numerical stability (1e-5)
+  ⊙ = element-wise multiplication
+```
