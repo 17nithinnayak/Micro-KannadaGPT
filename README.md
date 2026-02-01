@@ -110,8 +110,20 @@ weights = softmax(scores, dim=-1)  # (B, T, T)
 #  [0.45, 0.55, 0.00, 0.00]   ← Token 1: 45% to tok0, 55% to itself
 #  [0.25, 0.30, 0.45, 0.00]   ← Token 2 distributes attention
 #  [0.20, 0.25, 0.28, 0.27]]  ← Token 3 attends to all previous
+```
+
+Why Causal Masking?
+```
+WITHOUT masking (wrong for generation):
+Token "ನ" can see: "ಜ್ಞಾನವೇ" ← Correct
+                   AND "ಶ್ರೇಷ್ಠ" ← CHEATING! (future tokens)
+
+WITH masking (correct):
+Token "ನ" can see: "ಜ್ಞಾ" only ← Only past + current
 
 # Step 6: Weighted sum of values
 output = weights @ V  # (B, T, head_size)
+```
+
 # Token at position i gets: weighted average of values from positions 0..i
 ```
