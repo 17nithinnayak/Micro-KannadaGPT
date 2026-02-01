@@ -165,3 +165,36 @@ Where:
   head_i = Attention(Q @ W_qi, K @ W_ki, V @ W_vi)
   h = number of heads (4 in our case)
 ```
+
+3. Feed-Forward Network (FFN)
+Purpose: Process each token's representation independently with non-linear transformations.
+Architecture:
+```
+FFN(x) = ReLU(x @ W_1 + b_1) @ W_2 + b_2
+
+Dimensions:
+  Input:  (B, T, 64)
+     ↓
+  W_1: 64 → 256  (Expand by 4x)
+     ↓
+  ReLU: max(0, x)  (Non-linearity)
+     ↓
+  W_2: 256 → 64  (Contract back)
+     ↓
+  Output: (B, T, 64)
+```
+Why 4x Expansion?
+```
+Small space (64 dims): Limited expressiveness
+x_small = [0.1, 0.2, ..., 0.64]  # 64 numbers
+
+# Large space (256 dims): More room to learn complex patterns
+x_large = [0.1, 0.2, ..., ..., ..., 2.56]  # 256 numbers
+# Can represent more complex functions
+
+# Then compress back to 64 dims with learned features
+```
+Analogy:
+
+Attention = "Communication" (tokens talk to each other)
+FFN = "Thinking" (process what you learned)
