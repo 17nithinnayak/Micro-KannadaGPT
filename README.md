@@ -110,6 +110,7 @@ weights = softmax(scores, dim=-1)  # (B, T, T)
 #  [0.45, 0.55, 0.00, 0.00]   ← Token 1: 45% to tok0, 55% to itself
 #  [0.25, 0.30, 0.45, 0.00]   ← Token 2 distributes attention
 #  [0.20, 0.25, 0.28, 0.27]]  ← Token 3 attends to all previous
+# Token at position i gets: weighted average of values from positions 0..i
 ```
 
 Why Causal Masking?
@@ -125,5 +126,42 @@ Token "ನ" can see: "ಜ್ಞಾ" only ← Only past + current
 output = weights @ V  # (B, T, head_size)
 ```
 
-# Token at position i gets: weighted average of values from positions 0..i
+2. Multi-Head Attention
+Purpose: Learn multiple types of relationships in parallel.
+Why Multiple Heads?
+Each head can specialize:
+
+Head 1: Syntactic patterns (consonant + halant combinations)
+Head 2: Semantic patterns (word boundaries)
+Head 3: Positional patterns (nearby character dependencies)
+Head 4: Rare patterns (special character combinations)
+
+Architecture:
+```
+Input: (B, T, 64)
+         ↓
+Split into 4 heads (each gets 16 dims)
+         ↓
+┌────────┬────────┬────────┬────────┐
+│ Head 1 │ Head 2 │ Head 3 │ Head 4 │
+│ (16d)  │ (16d)  │ (16d)  │ (16d)  │
+│        │        │        │        │
+│Q,K,V   │Q,K,V   │Q,K,V   │Q,K,V   │
+│Attn    │Attn    │Attn    │Attn    │
+└───┬────┴───┬────┴───┬────┴───┬────┘
+    │        │        │        │
+    └────────┴────────┴────────┘
+              Concatenate
+                 ↓
+            (B, T, 64)
+                 ↓
+         Linear Projection
+                 ↓
+            (B, T, 64)
+Formula:
+MultiHead(Q, K, V) = Concat(head_1, ..., head_h) @ W_o
+
+Where:
+  head_i = Attention(Q @ W_qi, K @ W_ki, V @ W_vi)
+  h = number of heads (4 in our case)
 ```
